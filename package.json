@@ -1,0 +1,31 @@
+{
+    "name": "noname-language",
+    "displayName": "Noname Language",
+    "description": "Syntax highlighting for Noname language",
+    "version": "0.0.1",
+    "publisher": "noname",
+    "engines": {
+        "vscode": "^1.60.0"
+    },
+    "license": "MIT",
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "noname",
+                "aliases": ["Noname", "noname"],
+                "extensions": [".no"],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "noname",
+                "scopeName": "source.noname",
+                "path": "./syntaxes/noname.tmLanguage.json"
+            }
+        ]
+    }
+}
