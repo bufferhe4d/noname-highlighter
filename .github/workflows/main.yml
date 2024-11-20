@@ -1,2 +1,16 @@
-name: "GitHub Action for vsce"
-uses: "lannonbr/vsce-action@4.0.0"
+on:
+  push:
+    branches:
+      - master
+name: Deploy Extension
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install
+      - uses: lannonbr/vsce-action@4.0.0
+        with:
+          args: "publish -p $VSCE_TOKEN"
+        env:
+          VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
