@@ -1,0 +1,116 @@
+{
+    "name": "noname",
+    "scopeName": "source.noname",
+    "patterns": [
+        { "include": "#comments" },
+        { "include": "#keywords" },
+        { "include": "#types" },
+        { "include": "#functions" },
+        { "include": "#struct_declaration" },
+        { "include": "#array_types" },
+        { "include": "#operators" },
+        { "include": "#numbers" }
+    ],
+    "repository": {
+        "comments": {
+            "patterns": [{
+                "name": "comment.line.double-slash.noname",
+                "match": "//.*$"
+            }]
+        },
+        "keywords": {
+            "patterns": [{
+                "name": "keyword.control.noname",
+                "match": "\\b(fn|let|mut|if|else|for|in|return|struct|const|pub|use|unsafe|hint)\\b"
+            }]
+        },
+        "types": {
+            "patterns": [
+                {
+                    "name": "storage.type.builtin.noname",
+                    "match": "\\b(Field|Bool)\\b"
+                },
+                {
+                    "name": "storage.type.custom.noname",
+                    "match": "\\b[A-Z][a-zA-Z0-9_]*\\b"
+                }
+            ]
+        },
+        "functions": {
+            "patterns": [
+                {
+                    "name": "support.function.builtin.noname",
+                    "match": "\\b(assert|assert_eq|log)\\b"
+                },
+                {
+                    "match": "\\b(fn)\\s+([a-z][a-zA-Z0-9_]*)\\s*\\(",
+                    "captures": {
+                        "1": { "name": "keyword.control.noname" },
+                        "2": { "name": "entity.name.function.noname" }
+                    }
+                },
+                {
+                    "match": "\\b([a-z][a-zA-Z0-9_]*)\\s*\\(",
+                    "captures": {
+                        "1": { "name": "entity.name.function.call.noname" }
+                    }
+                }
+            ]
+        },
+        "struct_declaration": {
+            "begin": "\\b(struct)\\s+([A-Z][a-zA-Z0-9_]*)\\s*\\{",
+            "beginCaptures": {
+                "1": { "name": "keyword.control.noname" },
+                "2": { "name": "entity.name.type.struct.noname" }
+            },
+            "end": "\\}",
+            "patterns": [
+                {
+                    "match": "\\s*([a-z][a-zA-Z0-9_]*)\\s*:\\s*([A-Z][a-zA-Z0-9_]*|\\[.*?\\])",
+                    "captures": {
+                        "1": { "name": "variable.other.member.noname" },
+                        "2": { "name": "storage.type.noname" }
+                    }
+                }
+            ]
+        },
+        "array_types": {
+            "begin": "\\[",
+            "end": "\\]",
+            "patterns": [
+                { "include": "#types" },
+                { "include": "#numbers" },
+                {
+                    "match": ";",
+                    "name": "keyword.operator.noname"
+                }
+            ]
+        },
+        "operators": {
+            "patterns": [
+                {
+                    "name": "keyword.operator.arithmetic.noname",
+                    "match": "\\+|-|\\*|/"
+                },
+                {
+                    "name": "keyword.operator.comparison.noname",
+                    "match": "==|!="
+                },
+                {
+                    "name": "keyword.operator.assignment.noname",
+                    "match": "="
+                },
+                {
+                    "name": "keyword.operator.accessor.noname",
+                    "match": "\\.|::"
+                }
+            ]
+        },
+        "numbers": {
+            "patterns": [{
+                "name": "constant.numeric.decimal.noname",
+                "match": "\\b\\d+\\b"
+            }]
+        }
+    }
+}
